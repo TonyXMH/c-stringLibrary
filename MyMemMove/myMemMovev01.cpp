@@ -11,6 +11,8 @@ using namespace std;
 void *myMemMove(void *des, void *src, int count)
 {
 	void *ret = des;
+	if(NULL == des || NULL == src)
+		return des;
 	while(count--)
 	{
 		*(char*)des = *(char*)src;
