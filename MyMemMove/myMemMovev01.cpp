@@ -8,10 +8,14 @@
 #include<iostream>
 #include<cstring>
 using namespace std;
-void myMemMove(char *des, char *src, int count)
+void myMemMove(void *des, void *src, int count)
 {
 	while(count--)
-		*des++ = *src++;
+	{
+		*(char*)des = *(char*)src;
+		des = (char*)des + 1;				//?????????
+		src = (char*)src + 1;
+	}
 }
 int main(void)
 {
