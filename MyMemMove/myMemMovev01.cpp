@@ -7,14 +7,13 @@
 
 #include<iostream>
 #include<cstring>
+#include<cassert>
 using namespace std;
 void *myMemMove(void *des, void *src, int count)
 {
+	assert(des);
+	assert(src);
 	void *ret = des;
-#ifdef DEBUG
-	if(NULL == des || NULL == src)
-		return des;
-#endif
 	while(count--)
 	{
 		*(char*)des = *(char*)src;
@@ -26,11 +25,11 @@ void *myMemMove(void *des, void *src, int count)
 int main(void)
 {
 	const int size = 1024;
-	char p1[size] = "HELLO, WORLD!";
+	char p[size] = "HELLO, WORLD!";
 	char p2[size];
-	myMemMove(p2, p1, strlen(p1));
+	myMemMove(p+1, p, strlen(p) + 1);
 //	p2[15] = 'd';
-	cout << p2 << endl;
+	cout << p << endl;
 	return 0;
 }
 
