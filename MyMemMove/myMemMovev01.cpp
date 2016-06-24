@@ -9,16 +9,30 @@
 #include<cstring>
 #include<cassert>
 using namespace std;
-void *myMemMove(void *des, void *src, int count)
+void *myMemMove(void *des,  const void *src, int count)
 {
 	assert(des);
 	assert(src);
 	void *ret = des;
-	while(count--)
+	if(des <= src || (char*)des >= (char*)src + count)
 	{
-		*(char*)des = *(char*)src;
-		des = (char*)des + 1;				//?????????
-		src = (char*)src + 1;
+		while(count--)
+		{
+			*(char*)des = *(char*)src;
+			des = (char*)des + 1;			
+			src = (char*)src + 1;
+		}
+	}
+	else
+	{
+		des = (char*)des + count - 1;		// pay an attention on the length
+		src = (char*)src + count - 1;
+		while(count--)
+		{
+			*(char*)des = *(char*)src;
+			des = (char*)des - 1;
+			src = (char*)src - 1;
+		}
 	}
 	return ret;
 }
